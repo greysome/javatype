@@ -1,0 +1,37 @@
+types B<A
+A::f(Object) return B
+A::f(Object) return A          same signature
+B::f(Object) return Object     improper override return type
+A::f(A,B)
+A::f(B,A)
+A a = A()
+B b
+a.g()                          no matching
+a.f(b,b)                       multiple matching
+types A                        type already defined
+C::f()                         undefined calling type
+A::g(A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A) return A    barely enough params
+A::g(A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A) return A  too many params
+A::h(C) return A               undefined param type
+A::h() return D		       undefined return type
+a.f((C)a)                      undefined cast type
+c.f()                          undefined caller
+a.f((B)a)                      invalid param type
+a.f((Object)a)                 invalid cast type
+a.f(c)                         undefined object
+a.f(a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a)   too many params
+b.f(b)                         uninitialised caller
+B c = (C)b                     undefined cast type
+# undefined object
+B b1 = x
+B b1 = (B)a                    rtt not a subtype of cast type
+# undefined object
+B b1 = c
+B b1 = C()                     undefined type
+# undefined object
+b = c
+# rhs not subtype
+b = a
+C a                            undefined type
+# rhs not subtype of lhs
+B b1 = a

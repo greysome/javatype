@@ -1,0 +1,37 @@
+types C<B<A,E<D
+A::f(D)
+A::f(D,E)
+B::f(D)
+B::f(E,E)
+C::f(D,D,D)
+A a = A()
+B b = B()
+C c = C()
+D d = D()
+E e = E()
+a.f(d)
+a.f(d,e)
+b.f(d)
+b.f(e,e)
+c.f(d,d,d)
+b.f(d)
+c.f(d)
+b.f(d,e)
+D d2 = E()
+b.f((E)d2,e)
+b.f(e,e)
+c.f(e,d,e)
+types Circle
+Object::equals(Object) return boolean
+Circle::equals(Object) return boolean
+Circle::equals(Circle) return boolean
+Circle c1 = Circle()
+Circle c2 = Circle()
+Object o1 = c1
+Object o2 = c2
+o1.equals(o2)
+o1.equals((Circle)o2)
+o1.equals(c2)
+c1.equals(o2)
+c1.equals((Circle)o2)
+c1.equals(c2)
