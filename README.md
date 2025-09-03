@@ -1,7 +1,9 @@
 # javatype
 
 To build, just `gcc javatype.c -o javatype`
+
 To run, either `./javatype` for interactive prompt or `./javatype <filename>` to load statements from the file line-by-line. Note that files must end with a newline.
+
 To learn the syntax, look at `test.txt`. Also, `err.txt` shows all the possible errors that can occur.
 
 # Demo
