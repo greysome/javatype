@@ -91,6 +91,33 @@ void htinsert(hashtable *ht, char *key, void *value) {
   ht->items++;
 }
 
+// Return 0 if key1 = key2 as arrays of `keytype`-byte sized elements,
+//        1 otherwise.
+
+static int comparekey(char *key1, char *key2, size_t keytype) {
+  bool allnull1, allnull2;
+  int i;
+  char *p1, *p2;
+
+  p1 = key1;
+  p2 = key2;
+nextelem:
+  i = 0;
+
+  allnull1 = true;
+  allnull2 = true;
+  for (i = 0; i < keytype; i++) {
+    if (p1[i]) allnull1 = false;
+    if (p2[i]) allnull2 = false;
+  }
+  if ((allnull1 && !allnull2) || (!allnull1 && allnull2)) return 1;
+  if (allnull1 && allnull2) return 0;
+
+  for (i = 0; i < keytype; p1++, p2++, i++)
+    if (*p1 != *p2) return 1;
+  goto nextelem;
+}
+
 void *htfind(hashtable *ht, char *key) {
   size_t h, h1;
   hashtable_entry *e;
@@ -99,7 +126,7 @@ void *htfind(hashtable *ht, char *key) {
 try:
   e = ht->entries + h;
   if (!e->occupied) return NULL;
-  if (strcmp(e->key, key) == 0) return e->value;
+  if (comparekey(e->key, key, ht->keytype) == 0) return e->value;
   h++;
   if (h >= ht->capacity) h -= ht->capacity;
   goto try;

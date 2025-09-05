@@ -16,22 +16,22 @@ To learn the syntax, look at `test.txt`. Also, `err.txt` shows all the possible 
 - B <: A
 - A <: Object
 > ?t
-boolean <: _Root
-A <: Object
-B <: A
-_Root
-int <: _Root
-float <: _Root
-Object <: _Root
-double <: _Root
-char <: _Root
+- boolean <: _Root
+- A <: Object
+- B <: A
+- _Root
+- int <: _Root
+- float <: _Root
+- Object <: _Root
+- double <: _Root
+- char <: _Root
 > A::f(Object)
 > B::f(Object)
 > B::f(A)
 > ?v
-A.f(Object)
-B.f(Object)
-B.f(A)
+- A::f(Object)
+- B::f(Object)
+- B::f(A)
 > A a = A()
 - a : A (rtt=A)
 > A b1 = B()
@@ -39,9 +39,9 @@ B.f(A)
 > B b2 = B()
 - b2 : B (rtt=B)
 > ?o
-a : A (rtt=A)
-b1 : A (rtt=B)
-b2 : B (rtt=B)
+- a : A (rtt=A)
+- b1 : A (rtt=B)
+- b2 : B (rtt=B)
 > a.f(a)
 - a.f(A) -> A::f(Object) (ctt) -> A::f(Object) (rtt)
 > b1.f(a)

@@ -2,7 +2,6 @@
 //
 // Refer to types.c for a note about the term "signature/sig"
 #include "common.h"
-#include "err.c"
 #include "types.c"
 
 #define ARENAMAX 1024
@@ -83,10 +82,7 @@ loop:
 first:
     if (!expect(NONSPECIAL)) return false;
 
-    if (gettype(tok)) {
-      printf("info: type %s already exists\n", tok);
-      goto skip;
-    }
+    if (gettype(tok)) { errmsg = "type is already defined"; return false; }
 
     if (!creattype(tok, "Object")) return false;
 

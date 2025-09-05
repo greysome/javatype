@@ -7,7 +7,6 @@
 // hope I don't cause confusion!
 #include "common.h"
 #include "hashtable.c"
-#include "err.c"
 
 struct _type {
   struct _type *super;
@@ -241,9 +240,9 @@ void dumptypes() {
     if (e->occupied) {
       t = e->value;
       if (t->super)
-	printf("%s <: %s\n", t->name, t->super->name);
+	printf("- %s <: %s\n", t->name, t->super->name);
       else
-	printf("%s\n", t->name);
+	printf("- %s\n", t->name);
     }
   }
 }
@@ -257,7 +256,7 @@ void dumpobjects() {
     e = OBJECTS.entries + i;
     if (e->occupied) {
       o = e->value;
-      printf("%s : %s (rtt=%s)\n", o->name, o->ctt->name, o->rtt->name);
+      printf("- %s : %s (rtt=%s)\n", o->name, o->ctt->name, o->rtt->name);
     }
   }
 }
@@ -304,16 +303,16 @@ void dumpvtables() {
       st = e1->value;
 
       for (k = 0; k < st->capacity; k++) {
-	e2 = st->entries + k;
-	if (!e2->occupied) continue;
+        e2 = st->entries + k;
+        if (!e2->occupied) continue;
 
-	sig = (type **)e2->key;
-	meth = e2->value;
+        sig = (type **)e2->key;
+        meth = e2->value;
 
-	printf("%s.%s(", meth->calltype->name, methodname);
-	dumpsig(sig);
-	if (meth->rettype) printf(") -> %s\n", meth->rettype->name);
-	else printf(")\n");
+        printf("- %s::%s(", meth->calltype->name, methodname);
+        dumpsig(sig);
+        if (meth->rettype) printf(") -> %s\n", meth->rettype->name);
+        else printf(")\n");
       }
     }
   }
